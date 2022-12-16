@@ -3,6 +3,7 @@ package main.java.com.study.jdbc.repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import lombok.RequiredArgsConstructor;
 import main.java.com.study.jdbc.entity.User;
@@ -33,7 +34,7 @@ public class UserDao {	// Dao : Data access Object [데이터에 접근하는 �
 		try {
 			con = pool.getConnection();
 			sql = "insert into user_mst values(0, ?)";
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, user.getUsername());
 			successCount = pstmt.executeUpdate();
 	
